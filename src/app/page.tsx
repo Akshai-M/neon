@@ -63,7 +63,15 @@ export default function TodoApp() {
     }
   }
 
- 
+  async function deleteTodo(id: number) {
+    setLoading(true);
+    try {
+      await fetch(`/api/todos/${id}`, { method: 'DELETE' });
+      fetchTodos();
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center bg-gray-50 dark:bg-gray-900 p-4">

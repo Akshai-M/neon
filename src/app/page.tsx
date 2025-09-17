@@ -83,7 +83,13 @@ export default function TodoApp() {
             >
               {todo.title}
             </span>
-            
+            <button
+              className="ml-4 text-red-500 hover:text-red-700"
+              onClick={() => deleteTodo(todo.id)}
+              disabled={loading}
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>

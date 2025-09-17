@@ -77,7 +77,12 @@ export default function TodoApp() {
         {todos.length === 0 && <li className="text-center text-gray-500">No todos yet.</li>}
         {todos.map(todo => (
           <li key={todo.id} className="flex items-center justify-between bg-white dark:bg-gray-800 rounded p-3 mb-2 shadow">
-            
+            <span
+              className={`flex-1 cursor-pointer ${todo.completed ? 'line-through text-gray-400' : ''}`}
+              onClick={() => toggleTodo(todo.id, todo.completed)}
+            >
+              {todo.title}
+            </span>
             
           </li>
         ))}

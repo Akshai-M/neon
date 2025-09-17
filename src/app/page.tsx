@@ -49,7 +49,19 @@ export default function TodoApp() {
     }
   }
 
- 
+  async function toggleTodo(id: number, completed: boolean) {
+    setLoading(true);
+    try {
+      await fetch(`/api/todos/${id}`, {
+        method: 'PATCH',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ completed: !completed }),
+      });
+      fetchTodos();
+    } finally {
+      setLoading(false);
+    }
+  }
 
  
 

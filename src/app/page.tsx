@@ -30,7 +30,24 @@ export default function TodoApp() {
     setLoading(false);
   }
 
-  
+  async function addTodo(e: FormEvent) {
+    e.preventDefault();
+    if (!newTodo.trim()) return;
+    setLoading(true);
+    try {
+      const res = await fetch('/api/todos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title: newTodo }),
+      });
+      if (res.ok) {
+        setNewTodo('');
+        fetchTodos();
+      }
+    } finally {
+      setLoading(false);
+    }
+  }
 
  
 

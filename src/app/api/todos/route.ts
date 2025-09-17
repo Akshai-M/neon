@@ -12,3 +12,13 @@ export async function GET() {
   }
 }
 
+export async function POST(req: NextRequest) {
+  try {
+    const { title } = await req.json();
+    if (!title) return NextResponse.json({ error: 'Title is required' }, { status: 400 });
+    const todo = await prisma.todo.create({ data: { title } });
+    return NextResponse.json(todo, { status: 201 });
+  } catch (error) {
+    return NextResponse.json({ error: 'Failed to create todo' }, { status: 500 });
+  }
+}
